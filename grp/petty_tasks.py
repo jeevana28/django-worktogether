@@ -39,7 +39,7 @@ def createNotification(own,gen,status):
 		pass		
 	n.content = ctnt
 	owner_profile = Profile.objects.filter(user=own).first()
-	owner_profile.notif_count += 1
+	owner_profile.notif_count = owner_profile.notif_count + 1
 	owner_profile.save()
 	n.save()	
 

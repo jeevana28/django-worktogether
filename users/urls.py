@@ -23,6 +23,8 @@ urlpatterns = [
     auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', 
     auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
+    path('profile/delete/confirmation/', views.deleteprofile, name='profile-delete-conf'),
+    path('profile/delete/', views.deleteprof, name = 'profile-delete')
 
 ]
 

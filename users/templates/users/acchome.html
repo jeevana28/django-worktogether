@@ -1,6 +1,6 @@
 {% extends "users/base2.html" %}
 {% block content %}
-  <p>Select the you have entered during registration</p>
+  <p>Select the group you have entered during registration</p>
   {% for group in groups %}
     <article class="media content-section">
         <h2><a href="{% url 'grouphome' group.group_name %}">{{group.get_group_name_display}}</a></h2>

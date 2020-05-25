@@ -17,7 +17,8 @@
             {{ p_form|crispy }}
         </fieldset>
         <div class="from-group">
-            <button class="btn-outline-info" type="submit">Update</button>
+            <button class="btn btn-info" type="submit">Update</button>
+            <a class = "btn btn-danger btn-sm mt-1 mb-1" href="{% url 'profile-delete-conf' %}">Delete</a>
         </div>
       </form>
   </div>

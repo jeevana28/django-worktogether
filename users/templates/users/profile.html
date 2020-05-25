@@ -6,6 +6,11 @@
   background-color :#26599b;
   color :white;
 } 
+#u-msg-box
+{
+  background-color: #cad1d3;
+  color : #000000;
+}
 </style>
   
         <div class ='row'>
@@ -21,13 +26,13 @@
                             <span class="display-4">{{profiler_profile.user.username}}</span> <br>
                             {% if profiler_profile.user != user %}
                               {% if status == '0' or status == '1' %}
-                                <div class="row"><div class="col">
+                                <div class="row"><div class="col"><br>
                                 <button type="button" class="btn btn-info mx-2" id='fr_btn' state={{status}}>{{fr_button}}</button>
                               {% endif %}
                               {% if status == '2' %}
-                              <div class="row"><div class="col">
+                              <div class="row"><div class="col"><br>
                                   <div class="dropdown">
-                                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="resp_req_btn">
+                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="resp_req_btn">
                                         Respond
                                       </button>
                                       <div class="dropdown-menu" id='resp_dropdown_menu'>
@@ -37,9 +42,9 @@
                                     </div>
                                {% endif %}
                                {% if status == '3' %}
-                               <div class="row"><div class="col">
+                               <div class="row"><div class="col"><br>
                                   <div class="dropdown">
-                                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="resp_req_btn">
+                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="resp_req_btn">
                                         ✔Connected
                                       </button>
                                       <div class="dropdown-menu">
@@ -48,11 +53,11 @@
                                     </div>
                                {% endif %}     
                               </div>
-                              <div class=col>
-                                <button type="button" class="btn btn-info mx-2" id='report_user' state={{status}}>Report User</button>
+                              <div class=col><br>
+                                <button type="button" class="btn btn-secondary mx-2" id='report_user' state={{status}}>Report User</button>
                               </div>
                              {% else %}
-                               <div class=col><a href="{% url 'updateProfile' %}">
+                               <div class=col><br><a href="{% url 'updateProfile' %}">
                                 <button type="button" class="btn btn-primary mx-2">Update Profile</button></a>
                               </div>  
                              {% endif %} 

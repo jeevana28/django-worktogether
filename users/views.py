@@ -15,7 +15,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_text
 from django.core.mail import EmailMessage
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def home(request):
     return render(request, 'users/homepage.html')
@@ -82,6 +83,7 @@ def activate(request, uidb64, token):
         username = user.username
         r_user = User.objects.filter(username = username).first()
         r_pro = Profile.objects.filter(user = r_user).first()
+        r_pro.notif_count = 0
         r_group = Groupf.objects.filter(group_name = r_pro.group).first()
         r_group.users.add(r_pro)
         messages.success(request,"Account Created for %s is created. Login!" %username)
@@ -126,3 +128,23 @@ class GroupCreateView(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
+# class ProfileDelete(LoginRequiredMixin, DeleteView):
+#     model = Profile
+#     def get_success_url(self):
+#         profile = self.get_object()
+#         return reverse_lazy('homepage')
+
+
+def deleteprofile(request):
+    profile = Profile.objects.filter(user = request.user).first()
+    user = User.objects.filter(username = request.user.username).first()
+    #profile.delete()
+    #messages.success(request, "Your profile is deleted") 
+    return render(request, 'users/profiledelete.html')
+def deleteprof(request):
+    profile = Profile.objects.filter(user = request.user).first()
+    user = User.objects.filter(username = request.user.username).first()
+    profile.delete()
+    user.delete()
+    messages.success(request, "Your profile is deleted, Logout before proceeding")
+    return render(request, 'users/delete.html') 

@@ -231,9 +231,19 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+# class CommentCreateView(LoginRequiredMixin,UserPassesTestMixin, CreateView):
+#     model = Comment
+#     fields = ['content']
+
+#     def form_valid(self, form):
+#         form.instance.author =  self.request.user
+#         form.instance.post = 
+#         return super().form_valid(form)
 
 def add_comment(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    name = request.user.profile.group
+    posts = Post.objects.filter(grpname = name)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -244,5 +254,5 @@ def add_comment(request, pk):
             return redirect('post-detail', pk=post.pk)
     else:
         form = CommentForm()
-    return render(request, 'grp/add_comment.html', {'form': form})
+    return render(request, 'grp/add_comment.html', {'form': form, 'post':post})
 
